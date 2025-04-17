@@ -1,27 +1,42 @@
-{# templates/_base.html #}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Twig</title>
+    {# <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> #}
+    <title>Twig Index</title>
 </head>
 <body>
-    <h1>Super site Twig Master</h1>
-    
+    <h1>Projeto Twig</h1>
+
     {% if titulo %}
     <h2>{{ titulo }}</h2>
     {% endif %}
+    <hr>
+    <div style="display: flex; justify-content: space-between;">
+        <span>
+            <a href="index.php">Inicial</a> |
+            <a href="horario.php">Horário</a> |
+        {% if session.usuario is defined %}
+            <a href="compras.php">Compras</a> |
+            <a href="compromissos.php">Compromissos</a> |
+            <a href="usuarios.php">Usuários</a> |
+            </span>
+
+            <span>
+                <span>Usuário: {{ session.usuario }} |</span>
+                <a href="logout.php">Logout</a>
+            </span>
+        {% else %}
+        </span>
+            <a href="login.php">Login</a>
+        {% endif %}
+    </div>
 
     <hr>
-    <a href="index.php">Inicial</a> |
-     <a href="compras.php">Compras</a> |
-     <a href="horario.php">Horário</a> |
-     <a href="compromissos.php">Compromissos</a> |
- 
-     <hr>
 
     {% block conteudo %}{% endblock %}
+
 
 </body>
 </html>

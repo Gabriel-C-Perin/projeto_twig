@@ -1,14 +1,15 @@
 <?php
+
+use Carbon\Carbon; 
 require('twig_carregar.php');
+
 date_default_timezone_set('America/Sao_Paulo');
 
-use Carbon\Carbon;
-
-$hj = Carbon::now() . '<br>';
-
-$amnh = Carbon::now()->addDay() . '<br>';
+$date_today = Carbon::now();
+$date_tomorrow = Carbon::now()->addDay();
 
 echo $twig->render('horario.html', [
-    'hj' => Carbon::parse($hj)->format('d/m/Y'),
-    'amnh' => Carbon::parse($amnh)->format('d/m/Y')
+    'titulo' => "Horário",
+    'date_today' => Carbon::parse($date_today)->format('d/m/Y'),
+    'date_tomorrow' =>  Carbon::parse($date_tomorrow)->format('d/m/Y')
 ]);

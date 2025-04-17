@@ -1,8 +1,10 @@
 {% extends "_base.html" %}
 
-{% block conteudo %}
-<p>Hoje: {{hj}}</p>
-<p>amanhã: {{ amnh }}</p>
-<a href="index.html">voltar</a>
-{# Os sinais { } se chamam moustache #}
-{% endblock %}
+
+{% block conteudo %}    
+
+<p>Dia de Hoje: {{date_today}}</p>
+
+<p>Dia de Amanhã:  {{date_tomorrow}}</p>
+
+{% endblock %} 

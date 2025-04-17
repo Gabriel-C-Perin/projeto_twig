@@ -1,11 +1,12 @@
 <?php
-// twig_carregar.php
 
-// Carrega o carregador do Composer
 require_once('vendor/autoload.php');
 
-// Loader é quem carrega os arquivos HTML
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();    
+}
+
 $loader = new \Twig\Loader\FilesystemLoader('./templates');
 
-// Criar o objeto do Twig
 $twig = new \Twig\Environment($loader);
+$twig->addGlobal('session', $_SESSION);

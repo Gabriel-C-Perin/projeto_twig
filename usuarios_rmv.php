@@ -7,8 +7,8 @@ require('verifica_login.php');
 $id = $_GET['id'] ?? null;
 
 if ($id) {
-    $query = $pdo->prepare('DELETE FROM compromissos WHERE id = :id');
+    $query = $pdo->prepare('DELETE FROM usuarios WHERE id = :id');
     $query->execute([":id" => $id]);
 }
 
-header('location: compromissos.php');
+header('location: usuarios.php');

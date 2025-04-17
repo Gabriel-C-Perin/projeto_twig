@@ -1,28 +1,42 @@
-{# templates/compras.html #}
-{% extends "_base.html" %}
+{% extends '_base.html' %}
 
 {% block conteudo %}
-Página de compras
+  <h1>Página de {{ titulo }}</h1>
 
-<h3>Adicionar item</h3>
-<form action="compras_adc.php" method="post">
-    <input type="text" name="item" placeholder="Escreva o nome do item">
 
+<h3>Adicionar Item</h3>
+<form action="compras_adc.php" method="POST">
+    <input type="text" name="item" placeholder="Escreva o nome do item:">
     <input type="submit" value="Adicionar">
 </form>
 
-<h3>Minha lista de compras</h3>
-<ul>
-    {% for compra in compras %}
-        <li>
-            {{ compra.item }}
-            |
-            <a href="compras_editar.php?id={{ compra.id }}">Editar</a>
-            |
-            <a href="compras_apagar.php?id={{ compra.id }}">X</a>
-            
-        </li>
-    {% endfor %}
-</ul>
+
+
+  <h3>Minha Lista de Compras</h3>
+
+
+{% if dados|length > 0 %}
+  <table id="items" border="1">
+   <thead>
+      <tr>
+        <th>ID</th>
+        <th>Item</th>
+        <th colspan="2">Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in dados %}
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.item }}</td>
+          <td><a href='compras_edt.php?id={{ item.id }}'>Editar Item</a></td>
+          <td><a href='compras_rmv.php?id={{ item.id }}'>Apagar Item</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+   <p>Nenhum Item Adicionado</p>
+{% endif %}
 
 {% endblock %}

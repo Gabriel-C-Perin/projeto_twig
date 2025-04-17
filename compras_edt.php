@@ -7,30 +7,30 @@ require('inc/banco.php');
 require('verifica_login.php');
     
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $titulo = $_POST['titulo'] ?? null;
-    $date = $_POST['date'] ?? null;
+    $item = $_POST['item'] ?? null;
     $id = $_POST['id'] ?? null;
     
-    if ($titulo && $id && $date) {
-        $query = $pdo->prepare('UPDATE compromissos SET titulo = :titulo, date = :date WHERE id = :id');
+    if ($item && $id) {
+        $query = $pdo->prepare('UPDATE compras SET id = :id, item = :item WHERE id = :id');
         
         $query->execute([
             "id" => $id,
-            "titulo" => $titulo,
-            "date" => $date
+            "item" => $item
         ]);
     }   
     
-    header('location: compromissos.php');
+    header('location: compras.php');
 } else {
     $id = $_GET['id'] ?? null;
 
     if ($id) {
-        $query = $pdo->prepare('SELECT * FROM compromissos WHERE id = :id');
+        $query = $pdo->prepare('SELECT * FROM compras WHERE id = :id');
         $query->execute([":id" => $id]);
         $item = $query->fetch();
+
+        print_r($item);
         
-        echo $twig->render('form_compromissos.html', [
+        echo $twig->render('form_compras.html', [
             'item' => $item,
         ]);
     }
